@@ -26,7 +26,7 @@ GioiTinh bit not null,
 CMND Varchar(9) not null,
 SoDienThoai varchar(11) not null,
 DiaChi Nvarchar(255) not null,
-GhiChu Nvarchar(255) not null
+GhiChu Nvarchar(255) null
 )
 --3
 create table TheLoai(
@@ -41,10 +41,11 @@ TenSach nvarchar(250) not null,
 MaTheLoai int not null,
 MaKho int not null,
 SoLuongSach int not null,
+TinhTrangSach nvarchar(250) not null,
 GiaSach money not null,
 GiaNhap money not null,
+NhaXuatBan nvarchar(250) not null,
 MoTa Nvarchar(250) not null,
-GhiChu nvarchar(250) null,
 )
 --5
 create table DocGia(
@@ -52,7 +53,7 @@ MaDocGia int primary key not null Identity(1,1),
 TenDocGia nvarchar(50) not null,
 MaLoaiDocGia int not null,
 GioiTinh bit not null,
-NamSinh Date not null,
+NgaySinh Date not null,
 SDT varchar(11) not null,
 DiaChi nvarchar(250) not null,
 TrangThai varchar(250) not null,
@@ -62,15 +63,17 @@ MoTa nvarchar(250) null,
 create table LoaiDocGia(
 MaLoaiDocGia int primary key not null Identity(1,1),
 TenLoaiDocGia nvarchar(50) not null,
+UuDai int not null,
 MoTa nvarchar(250) null,
 )
 --7
 create table TacGia(
 MaTacGia int primary key not null Identity(1,1),
-TenTacGia nvarchar(100) not null,
+TenTacGia nvarchar(50) null,
+butdanh nvarchar(50) null,
 GioiTinh bit not null,
-NamSinh date not null,
-NguyenQuan nvarchar(250) not null,
+NgaySinh date null,
+NoiSinh nvarchar(250) null,
 GhiChu nvarchar(250) null
 )
 --8
