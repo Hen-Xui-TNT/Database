@@ -38,7 +38,6 @@ GhiChu nvarchar(250) null,
 create table Sach(
 MaSach int primary key not null Identity(1,1),
 TenSach nvarchar(250) not null,
-MaTheLoai int not null,
 MaKho int not null,
 SoLuongSach int not null,
 TinhTrangSach nvarchar(250) not null,
@@ -56,7 +55,7 @@ GioiTinh bit not null,
 NgaySinh Date not null,
 SDT varchar(11) not null,
 DiaChi nvarchar(250) not null,
-TrangThai varchar(250) not null,
+TrangThai nvarchar(250) not null,
 MoTa nvarchar(250) null,
 )
 --6
@@ -83,6 +82,7 @@ SoPhieuThue varchar(20) not null,
 MaDocGia int not null,
 MaNhanVien int not null,
 NgayThue date not null,
+NgayTra date not null,
 TongTien money not null,
 GhiChu nvarchar(250) null
 )
@@ -185,6 +185,17 @@ DiaChi Nvarchar(250) not null,
 SDT varchar(11) not null,
 Gmail Nvarchar(100) not null,
 GhiChu nvarchar(250) null
+)
+--19
+create table KhuyenMai(
+MaKhuyenMai int primary key not null Identity(1,1),
+NgayBatDau Date not null,
+NgayKetThuc Date not null,
+SoTienHoaDon money null,
+SoLuong int null,
+MaSach int null,
+GiaSach money null,
+KhuyenMai nvarchar(50) null
 )
 --Table Nhân Viên
 ALTER TABLE NhanVien ADD CONSTRAINT FK_NhanVien_Quyen FOREIGN KEY (MaQuyen) REFERENCES Quyen(MaQuyen)
