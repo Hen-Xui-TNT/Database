@@ -38,7 +38,6 @@ GhiChu nvarchar(250) null,
 create table Sach(
 MaSach int primary key not null Identity(1,1),
 TenSach nvarchar(250) not null,
-MaKho int not null,
 SoLuongSach int not null,
 TinhTrangSach nvarchar(250) not null,
 GiaSach money not null,
@@ -115,14 +114,8 @@ NgayPhat date not null,
 TongTien money not null,
 GhiChu nvarchar(250) null
 )
+
 --12
-create table Kho(
-MaKho int primary key not null Identity(1,1),
-TenKho varchar(50) not null,
-Ke varchar(50) not null,
-Ngan varchar(50) not null
-)
---13
 create table ChiTietPhieuThue(
 MaChiTietPhieuThue int primary key not null Identity(1,1),
 MaPhieuThue int not null,
@@ -132,7 +125,7 @@ SoLuong int not null,
 ThanhTien money not null,
 GhiChu nvarchar(250) null
 )
---14
+--13
 create table ChiTietPhieuNhap(
 MaChiTietPhieuNhap int primary key not null Identity(1,1),
 MaPhieuNhap int not null,
@@ -142,7 +135,7 @@ SoLuong int not null,
 ThanhTien money not null,
 GhiChu nvarchar(250) null
 )
---15
+--14
 create table ChiTietPhieuPhat(
 MaChiTietPhieuPhat int primary key not null Identity(1,1),
 MaPhieuPhat int not null,
@@ -153,7 +146,7 @@ SoLuong int not null,
 ThanhTien money not null,
 GhiChu nvarchar(250) null
 )
---16
+--15
 create table ChiTietPhieuThanhLy(
 MaChiTietPhieuThanhLy int primary key not null Identity(1,1),
 MaPhieuThanhLy int not null,
@@ -163,21 +156,21 @@ SoLuong int not null,
 ThanhTien money not null,
 GhiChu nvarchar(250) null
 )
---17
+--16
 create table ChiTietTacGia(
 MaChiTietTacGia int primary key not null Identity(1,1),
 MaSach int not null,
 MaTacGia int not null,
 GhiChu nvarchar(250) null
 )
---18
+--17
 create table ChiTietTheLoai(
 MaChiTietTheLoai int primary key not null Identity(1,1),
 MaSach int not null,
 MaTheLoai int not null,
 GhiChu nvarchar(250) null
 )
---19
+--18
 create table NhaCungCap(
 MaNhaCungCap int primary key not null Identity(1,1),
 TenNhaCungCao Nvarchar(100) not null,
@@ -201,8 +194,6 @@ KhuyenMai nvarchar(50) null
 ALTER TABLE NhanVien ADD CONSTRAINT FK_NhanVien_Quyen FOREIGN KEY (MaQuyen) REFERENCES Quyen(MaQuyen)
 -- Table Độc Giả
 ALTER TABLE DocGia ADD CONSTRAINT FK_DocGia_LoaiDocGia FOREIGN KEY (MaDocGia) REFERENCES LoaiDocGia(MaLoaiDocGia)
--- Table Sách
-ALTER TABLE Sach ADD CONSTRAINT FK_Sach_Kho FOREIGN KEY (MaKho) REFERENCES Kho(MaKho)
 -- Chi tiết tác giả
 ALTER TABLE ChiTietTacGia ADD CONSTRAINT FK_ChiTietTacGia_Sach FOREIGN KEY (MaSach) REFERENCES Sach(MaSach)
 ALTER TABLE ChiTietTacGia ADD CONSTRAINT FK_ChiTietTacGia_TacGia FOREIGN KEY (MaTacGia) REFERENCES TacGia(MaTacGia)
