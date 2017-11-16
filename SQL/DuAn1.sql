@@ -1,6 +1,6 @@
 ﻿use master
-go
-drop database TNTDuAn1
+--go
+--drop database TNTDuAn1
 go
 create database TNTDuAn1
 go
