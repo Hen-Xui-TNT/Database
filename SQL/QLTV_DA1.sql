@@ -1,6 +1,6 @@
 ﻿use master
 go
---drop database TNTDuAn1
+drop database TNTDuAn1
 go
 create database TNTDuAn1
 go
@@ -72,7 +72,7 @@ butdanh nvarchar(50) null,
 GioiTinh bit not null,
 NgaySinh date null,
 NoiSinh nvarchar(250) null,
-GhiChu nvarchar(250) null
+GhiChu nvarchar(max) null
 )
 --8============================================================================================
 create table PhieuThue(
@@ -140,7 +140,7 @@ create table ChiTietPhieuPhat(
 MaChiTietPhieuPhat int primary key not null Identity(1,1),
 MaPhieuPhat int not null,
 MaSach int not null,
-LoiPhat Nvarchar(250) not null,
+LoiPhat int not null,
 TienPhat money not null,
 SoLuong int not null,
 ThanhTien money not null,
@@ -188,7 +188,7 @@ SoTienHoaDon money null,
 SoLuong int null,
 MaSach int null,
 GiaSach money null,
-KhuyenMai nvarchar(50) null
+KhuyenMai nvarchar(MAX) null
 )
 --Table Nhân Viên
 ALTER TABLE NhanVien ADD CONSTRAINT FK_NhanVien_Quyen FOREIGN KEY (MaQuyen) REFERENCES Quyen(MaQuyen)
@@ -230,6 +230,9 @@ insert into LoaiDocGia values(N'VIP', 5, N'')
 insert into LoaiDocGia values(N'Khách quen', 5, N'')
 insert into LoaiDocGia values(N'Khách mới', 5, N'')
 insert into LoaiDocGia values(N'Sinh viên', 5, N'')
+
+
+--delete LoaiDocGia where MaLoaiDocGia = 2
 -------------------------------------------2----------------------------------------
 select *from DocGia
 insert into DocGia values(N'Nguyễn Thị Minh Tâm', 1,1,'1998/05/26','01655730111',N'100/6 amakhe',N'chưa mượn',N'')
@@ -254,49 +257,127 @@ insert into Quyen values(N'Nhân viên', N'')
 insert into Quyen values(N'Quản Lý', N'')
 
 -----------------------------------------4---------------------------------------------------
-select *from NhanVien
+select * from NhanVien
 insert into NhanVien values(N'Nguyễn Thị Thủy', N'thuynt',12345,1,4000000,'1998/08/25','2017/8/20',1,'KT123456','01243101767',N'Trần Quý Cáp',N'')
 insert into NhanVien values(N'Nguyễn Thị Minh Tâm', N'tamntm',12345,2,6000000,'1998/05/26','2017/8/20',1,'KT123457','01655730111',N'100/6 amakhe',N'')
-insert into NhanVien values(N'Đỗ Huy Nhân', N'nhandh',12345,2,5000000,'1998/08/25','2017/02/15',1,'KT123876','0165545345',N'Trường Chinh',N'')
-insert into NhanVien values(N'Đỗ Thị Chinh', N'chinhdt',12345,1,5000000,'1998/08/25','2017/04/14',1,'KT123453','01287456321',N'100 Lê Duẩn',N'')
+insert into NhanVien values(N'Đỗ Huy Nhân', N'nhandh',12345,2,5000000,'1998/08/25','2017/02/15',0,'KT123876','0165545345',N'Trường Chinh',N'')
+insert into NhanVien values(N'Đỗ Thị Chinh', N'chinhdt',12345,1,5000000,'1998-08-25','2017-04-14',1,'KT123453','01287456321',N'100 Lê Duẩn',N'')
 
 ----------------------------------5--------------------------------------------
 select * from PhieuThue
-insert into PhieuThue values(1,1,1,'2017/02/12','2017/02/22',20000,N'' )
-insert into PhieuThue values(2,2,2,'2017/03/22','2017/03/30',22000,N'' )
-insert into PhieuThue values(3,4,1,'2017/05/03','2017/05/13',25000,N'' )
-insert into PhieuThue values(4,1,2,'2017/07/05','2017/07/15',25000,N'' )
-insert into PhieuThue values(5,3,1,'2017/08/20','2017/08/27',30000,N'' )
-insert into PhieuThue values(6,2,2,'2017/01/21','2017/01/29',30000,N'' )
-insert into PhieuThue values(7,1,1,'2017/09/17','2017/09/27',35000,N'' )
-insert into PhieuThue values(8,1,2,'2017/03/14','2017/03/24',25000,N'' )
-insert into PhieuThue values(9,4,2,'2017/02/15','2017/02/25',20000,N'' )
-insert into PhieuThue values(10,3,1,'2017/02/13','2017/02/23',30000,N'' )
+select * from DocGia
+select * from LoaiDocGia
+
+insert into PhieuThue values('PT001',1,1,'2017/10/12','2017/10/17',24400,N'' )
+insert into PhieuThue values('PT002',2,2,'2017/10/12','2017/10/17',44000,N'' )
+insert into PhieuThue values('PT003',3,1,'2017/10/12','2017/10/17',18000,N'' )
+insert into PhieuThue values('PT004',4,2,'2017/10/12','2017/10/17',25800,N'' )
+insert into PhieuThue values('PT005',5,1,'2017/10/12','2017/10/17',40000,N'' )
+insert into PhieuThue values('PT006',9,2,'2017/10/13','2017/10/18',24000,N'' )
+insert into PhieuThue values('PT007',7,1,'2017/10/13','2017/10/18',15400,N'' )
+insert into PhieuThue values('PT008',8,2,'2017/10/14','2017/10/19',41000,N'' )
+insert into PhieuThue values('PT009',11,2,'2017/10/15','2017/10/19',18000,N'' )
+insert into PhieuThue values('PT010',13,1,'2017/10/16','2017/10/20',14000,N'' )
+insert into PhieuThue values('PT011',14,1,'2017/10/17','2017/10/22',53200,N'' )
+insert into PhieuThue values('PT012',12,2,'2017/10/18','2017/10/23',12000,N'' )
+insert into PhieuThue values('PT013',3,1,'2017/10/19','2017/10/24',100400,N'' )
+insert into PhieuThue values('PT014',4,2,'2017/10/20','2017/10/25',32800,N'' )
+insert into PhieuThue values('PT015',5,1,'2017/10/21','2017/10/26',40000,N'' )
+insert into PhieuThue values('PT016',9,2,'2017/10/22','2017/10/27',16000,N'' )
+insert into PhieuThue values('PT017',7,1,'2017/10/23','2017/10/28',8400,N'' )
+insert into PhieuThue values('PT018',8,2,'2017/10/25','2017/11/01',44000,N'' )
+insert into PhieuThue values('PT019',9,2,'2017/10/26','2017/11/02',18000,N'' )
+insert into PhieuThue values('PT020',15,1,'2017/10/27','2017/11/03',16200,N'' )
+
+
+insert into PhieuThue values('PT021',1,1,'2017/11/01','2017/11/06',21800,N'' )
+insert into PhieuThue values('PT022',2,2,'2017/11/02','2017/11/07',27800,N'' )
+insert into PhieuThue values('PT023',4,1,'2017/11/03','2017/11/08',16000,N'' )
+insert into PhieuThue values('PT024',8,2,'2017/11/03','2017/11/08',4000,N'' )
+insert into PhieuThue values('PT025',9,1,'2017/11/06','2017/11/11',4400,N'' )
+insert into PhieuThue values('PT026',6,2,'2017/11/06','2017/11/11',44000,N'' )
+insert into PhieuThue values('PT027',11,1,'2017/11/08','2017/11/13',18000,N'' )
+insert into PhieuThue values('PT028',7,2,'2017/11/09','2017/11/14',16200,N'' )
+insert into PhieuThue values('PT029',2,2,'2017/11/09','2017/11/14',21800,N'' )
+insert into PhieuThue values('PT030',1,1,'2017/11/11','2017/11/16',27800,N'' )
+
 
 -----------------------------------6--------------------------------------------
 select * from PhieuPhat
-insert into PhieuPhat values('1',1,1,'2017/02/22',20000,N'' )
-insert into PhieuPhat values('2',2,2,'2017/03/30',20000,N'' )
-insert into PhieuPhat values('3',3,1,'2017/08/27',20000,N'' )
-insert into PhieuPhat values('4',4,2,'2017/05/13',20000,N'' )
-insert into PhieuPhat values('5',5,1,'2017/2/12',20000,N'' )
-insert into PhieuPhat values('6',4,2,'2017/02/25',20000,N'' )
-insert into PhieuPhat values('7',3,1,'2017/02/23',20000,N'' )
-insert into PhieuPhat values('8',2,2,'2017/2/12',20000,N'' )
-insert into PhieuPhat values('9',1,1,'2017/08/27',20000,N'' )
-insert into PhieuPhat values('10',5,2,'2017/4/12',20000,N'' )
+select * from PhieuThue
+insert into PhieuPhat values('1',1,1,'2017/10/17',15000,N'' )
+insert into PhieuPhat values('3',3,1,'2017/10/17',40000,N'' )
+insert into PhieuPhat values('10',15,2,'2017/10/20',18000,N'' )
+insert into PhieuPhat values('9',13,1,'2017/11/02',240000,N'' )
+insert into PhieuPhat values('2',2,2,'2017/11/07',100000,N'' )
+insert into PhieuPhat values('4',4,2,'2017/11/07',30000,N'' )
+insert into PhieuPhat values('7',8,1,'2017/11/08',30000,N'' )
+insert into PhieuPhat values('5',6,1,'2017/11/11',20000,N'' )
+insert into PhieuPhat values('7',8,1,'2017/11/08',60000,N'' )
+insert into PhieuPhat values('6',2,2,'2017/11/14',40000,N'' )
+
+
+
+
 --------------------------------------------7---------------------------------------------
 select * from Sach
-insert into Sach values(N'Doreamon',150,N'Sách mới nhập',30000,25000,N'NXB Kim Đồng',N'')
-insert into Sach values(N'Conan',150,N'Sách mới nhập',20000,15000,N'NXB Ánh Dương',N'')
-insert into Sach values(N'Thần đồng đất Việt',100,N'Sách mới nhập',15000,18000,N'NXB Thủy Nguyễn',N'')
-insert into Sach values(N'Sách giáo khoa',150,N'Sách mới nhập',220000,190000,N'NXB Minh Tâm',N'')
-insert into Sach values(N'Giáo trình ',50,N'Sách mới nhập',150000,120000,N'NXB Hoa Sen',N'')
-insert into Sach values(N'Truyện cười',30,N'Sách mới nhập',20000,15000,N'NXB Huy Nhân',N'')
-insert into Sach values(N'Shelockhom',150,N'Sách mới nhập',35000,30000,N'NXB Kim Đồng',N'')
-insert into Sach values(N'Hary Porter',160,N'Sách mới nhập',60000,50000,N'NXB Minh Tâm',N'')
-insert into Sach values(N'Truyện cổ tích',180,N'Sách mới nhập',30000,25000,N'NXB Thủy Nguyễn',N'')
-insert into Sach values(N'Tom & Jerry',150,N'Sách mới nhập',20000,15000,N'NXB Hoa Sen',N'')
+insert into Sach values(N'Doreamon',5,N'Sách mới nhập',30000,25000,N'NXB Kim Đồng',N'')
+insert into Sach values(N'Conan tập đặc biệt',15,N'Sách mới nhập',20000,1500,N'NXB Kim Đồng',N'')
+insert into Sach values(N'Thần đồng đất Việt',10,N'Sách mới nhập',5000,18000,N'NXB Thủy Nguyễn',N'')
+insert into Sach values(N'Sách giáo khoa',5,N'Sách mới nhập',22000,16000,N'NXB Minh Tâm',N'')
+insert into Sach values(N'Giáo trình ',5,N'Sách mới nhập',50000,40000,N'NXB Hoa Sen',N'')
+insert into Sach values(N'Truyện cười',5,N'Sách mới nhập',20000,1500,N'NXB Huy Nhân',N'')
+insert into Sach values(N'Shelock Homes',5,N'Sách mới nhập',150000,135000,N'NXB Kim Đồng',N'')
+insert into Sach values(N'Hary Porter',16,N'Sách mới nhập',60000,50000,N'NXB Minh Tâm',N'')
+insert into Sach values(N'Truyện cổ tích',10,N'Sách mới nhập',30000,25000,N'NXB Thủy Nguyễn',N'')
+insert into Sach values(N'Tom & Jerry',5,N'Sách mới nhập',20000,1500,N'NXB Hoa Sen',N'')
+
+insert into Sach values(N'Tuổi trẻ đáng bao nhiêu?',5,N'Sách mới nhập',56000,49000,N'NXB Kim Đồng',N'')
+insert into Sach values(N'Học vị bất kì ai',5,N'Sách mới nhập',48000,39000,N'NXB Ánh Dương',N'')
+insert into Sach values(N'Đắc nhân tâm',8,N'Sách mới nhập',61000,48000,N'NXB Thủy Nguyễn',N'')
+insert into Sach values(N'Lối sống tối giản của người Nhật',5,N'Sách mới nhập',68000,59000,N'NXB Minh Tâm',N'')
+insert into Sach values(N'Mình sinh ra đâu phải để buồn ',5,N'Sách mới nhập',58000,52000,N'NXB Hoa Sen',N'')
+insert into Sach values(N'Bí quyết thành công khi khời nghiệp',3,N'Sách mới nhập',70000,50000,N'NXB Huy Nhân',N'')
+insert into Sach values(N'Anh ấy đã không nắm tay tôi',5,N'Sách mới nhập',120000,100000,N'NXB Kim Đồng',N'')
+insert into Sach values(N'Nhà giả kim',10,N'Sách mới nhập',60000,50000,N'NXB Minh Tâm',N'')
+insert into Sach values(N'Hôm nay tôi thất tình',10,N'Sách mới nhập',86000,68000,N'NXB Thủy Nguyễn',N'')
+insert into Sach values(N'Linh hồn tội lỗi',5,N'Sách mới nhập',120000,105000,N'NXB Hoa Sen',N'')
+
+
+insert into Sach values(N'Iliad - Cuộc Chiến Thành Troy',5,N'sách cũ, nguyên vẹn',30000,25000,N'NXB Kim Đồng',N'')
+insert into Sach values(N'Theseus Và Cuộn Chỉ Của Ariadne',5,N'sách cũ, nguyên vẹn',60000,45000,N'NXB Ánh Dương',N'')
+insert into Sach values(N'Odyssey - Những Cuộc Phiêu Lưu Của Odysseus',2,N'sách cũ, nguyên vẹn',65000,56000,N'NXB Thủy Nguyễn',N'')
+insert into Sach values(N'Chàng Hoàng Tử Hạnh Phúc - Ngôi Nhà Thạch Lựu',5,N'sách cũ, nguyên vẹn',120000,110000,N'NXB Minh Tâm',N'')
+insert into Sach values(N'Thơ Tagore (Song Ngữ Việt - Anh) ',2,N'sách cũ, nguyên vẹn',150000,13000,N'NXB Hoa Sen',N'')
+insert into Sach values(N'Mùa Hái Quả',3,N'sách cũ, nguyên vẹn',20000,12500,N'NXB Huy Nhân',N'')
+insert into Sach values(N'Nhớ - Tuyển Tập Thơ Anh (Song Ngữ)',5,N'sách cũ, nguyên vẹn',35000,30000,N'NXB Kim Đồng',N'')
+insert into Sach values(N'Địa Ngục Đỏ',2,N'sách cũ, nguyên vẹn',60000,50000,N'NXB Minh Tâm',N'')
+insert into Sach values(N'Vì Người Ấy Là Em',2,N'sách cũ, nguyên vẹn',30000,25000,N'NXB Thủy Nguyễn',N'')
+insert into Sach values(N'Cô Gái Vượt Thời Gian',5,N'sách cũ, nguyên vẹn',40000,35000,N'NXB Hoa Sen',N'')
+
+insert into Sach values(N'Thủy Hử tập 1',2,N'sách cũ, nguyên vẹn',30000,25000,N'NXB Kim Đồng',N'')
+insert into Sach values(N'Thủy Hử tập 2',2,N'sách cũ, nguyên vẹn',30000,25000,N'NXB Kim Đồng',N'')
+insert into Sach values(N'Đôi Cánh Bị Lãng Quên',1,N'sách cũ, nguyên vẹn',56500,53000,N'NXB Thủy Nguyễn',N'')
+insert into Sach values(N'Lâu Đài Gỗ',1,N'sách cũ, nguyên vẹn',120000,100000,N'NXB Minh Tâm',N'')
+insert into Sach values(N'Alice Ở Xứ Sở Trong Gương ',3,N'sách cũ, nguyên vẹn',55000,47000,N'NXB Hoa Sen',N'')
+insert into Sach values(N'Truyện Cổ Tích Màu Lục',3,N'sách cũ, nguyên vẹn',20000,16500,N'NXB Huy Nhân',N'')
+insert into Sach values(N'Cô Bé Có Mọi Món Quà',5,N'sách cũ, nguyên vẹn',35000,30000,N'NXB Kim Đồng',N'')
+insert into Sach values(N'Nàng Công Chúa Giả Vờ Không Biết Mọi Chuyện',3,N'sách cũ, nguyên vẹn',60000,50000,N'NXB Minh Tâm',N'')
+insert into Sach values(N'Anh Có Thích Nước Mỹ Không? ',2,N'sách cũ, nguyên vẹn',30000,25000,N'NXB Thủy Nguyễn',N'')
+insert into Sach values(N'Đừng Nói Với Anh Ấy Tôi Vẫn Còn Yêu - Phần 2',1,N'sách cũ, nguyên vẹn',20000,50000,N'NXB Hoa Sen',N'')
+
+
+insert into Sach values(N'Đừng Nói Với Anh Ấy Tôi Vẫn Còn Yêu - Phần 1',1,N'sách cũ, nguyên vẹn',20000,50000,N'NXB Hoa Sen',N'')
+insert into Sach values(N'Hóa Ra Anh Vẫn Ở Đây',2,N'sách cũ, nguyên vẹn',20000,15000,N'NXB Ánh Dương',N'')
+insert into Sach values(N'Đừng Nhắc Em Nhớ Lại!',1,N'sách cũ, nguyên vẹn',2500,18000,N'NXB Thủy Nguyễn',N'')
+insert into Sach values(N'Nửa Đường Xuất Giá',1,N'sách cũ, nguyên vẹn',220000,190000,N'NXB Minh Tâm',N'')
+insert into Sach values(N'Ước Hẹn Phù Hoa ',1,N'sách cũ, nguyên vẹn',5000,120000,N'NXB Hoa Sen',N'')
+insert into Sach values(N'Bong Bóng Mùa Hè ',3,N'sách cũ, nguyên vẹn',20000,15000,N'NXB Huy Nhân',N'')
+insert into Sach values(N'Lý Thuyết Số Và Chuyên Đề Nâng Cao',1,N'sách cũ, nguyên vẹn',35000,30000,N'NXB Kim Đồng',N'')
+insert into Sach values(N'Kinh Tế Vĩ Mô',1,N'sách cũ, nguyên vẹn',60000,50000,N'NXB Minh Tâm',N'')
+insert into Sach values(N'Đa Thức - Chuỗi & Chuyên Đề Nâng Cao',1,N'sách cũ, nguyên vẹn',30000,25000,N'NXB Thủy Nguyễn',N'')
+insert into Sach values(N'Chuẩn Bị Kiến Thức Ôn Thi Tốt Nghiệp Trung Học Phổ Thông Và Tuyển Sinh Đại Học, Cao Đẳng - Môn Tiếng Pháp',5,N'sách cũ, nguyên vẹn',25000,15000,N'NXB Hoa Sen',N'')
+
 
 -------------------------------------------------8-------------------------------------------
 select* from PhieuThanhLy
@@ -349,6 +430,13 @@ insert into NhaCungCap values(N'Nhà cung cấp Phương Đông',N'Hòa Phú-Đ�
 insert into NhaCungCap values(N'Nhà cung cấp Hoàn Thành',N'Nha Trang','01273568459',N'NhaTrang@gmail.com',N'')
 insert into NhaCungCap values(N'Nhà cung cấp Tây Nguyên',N'27 Nguyễn Tất Thành - BMT','0976197097',N'fpoly@gmail.com',N'')
 
+insert into NhaCungCap values(N'Công ty TNHH phát hành Tây Nguyên',N'136, Nguyễn Công Trứ, P. Tự An, Thành phố Buôn Ma Thuột, T. Đắk Lắk','01655730111',N'nccHN@gmail.com',N'')
+insert into NhaCungCap values(N'Nhà xuất bản Giáo dục Việt Nam ',N'Nguyễn Chí Thanh_TP Hồ Chí Minh','01243101767',N'minhtamcp@gmail.com',N'')
+insert into NhaCungCap values(N'Nhà Xuất Bản Trẻ',N'Hòa Phú-Đà Nẵng','0935539808',N'nccPhuongDong@gmail.com',N'')
+insert into NhaCungCap values(N'Nhà Xuất Bản Kim Đồng',N'Nha Trang','01273568459',N'NhaTrang@gmail.com',N'')
+insert into NhaCungCap values(N'Công ty TNHH Sách Phương Nam:',N' 940 Đường Ba tháng Hai, Phường 15, Quận 11, TP.HCM','0976197097',N'lienhenxbtrithuc@gmail.com',N'')
+
+
 -------------------------------11-----------------------------------
 select * from PhieuNhap
 select * from PhieuThanhLy
@@ -365,6 +453,7 @@ insert into PhieuNhap values(10,4,2,'2017/09/19',4000000,N'')
 
 ----------------------------------------12-------------------------------------
 select * from ChiTietPhieuNhap
+select * from PhieuNhap
 select * from Sach
 insert into ChiTietPhieuNhap values(1,1,25000,50,1200000,N'')
 insert into ChiTietPhieuNhap values(2,2,15000,60,900000,N'')
@@ -379,41 +468,136 @@ insert into ChiTietPhieuNhap values(10,10,15000,150,2250000,N'')
 
 -----------------------------------13-------------------------------------------
 select * from PhieuThue
-select * from Sach
+--select * from Sach
+/*
+UPDATE PhieuThue SET
+TongTien =( select Sum(ThanhTien) from ChiTietPhieuThue
+where MaPhieuThue = 30)
+where MaPhieuThue = 30
+*/
 select * from ChiTietPhieuThue
-insert into ChiTietPhieuThue values(1,1,20000,20,400000,N'')
-insert into ChiTietPhieuThue values(2,2,15000,20,300000,N'')
-insert into ChiTietPhieuThue values(3,3,10000,20,20000,N'')
-insert into ChiTietPhieuThue values(4,4,15000,10,150000,N'')
-insert into ChiTietPhieuThue values(5,5,200000,5,1000000,N'')
-insert into ChiTietPhieuThue values(6,6,120000,3,360000,N'')
-insert into ChiTietPhieuThue values(7,7,17000,25,425000,N'')
-insert into ChiTietPhieuThue values(8,8,30000,15,450000,N'')
-insert into ChiTietPhieuThue values(9,9,50000,25,1250000,N'')
-insert into ChiTietPhieuThue values(10,10,15000,20,300000,N'')
-insert into ChiTietPhieuThue values(1,1,25000,22,550000,N'')
-insert into ChiTietPhieuThue values(2,2,20000,20,11111111,N'')
-insert into ChiTietPhieuThue values(3,3,15000,20,11111111,N'')
-insert into ChiTietPhieuThue values(4,4,18000,20,11111111,N'')
-insert into ChiTietPhieuThue values(5,5,220000,20,11111111,N'')
+insert into ChiTietPhieuThue values(01,1,6000,2,12000,N'')
+insert into ChiTietPhieuThue values(01,2,4000,1,4000,N'')
+insert into ChiTietPhieuThue values(01,3,4000,1,4000,N'')
+insert into ChiTietPhieuThue values(01,4,4400,1,4400,N'')
+insert into ChiTietPhieuThue values(02,5,10000,1,10000,N'')
+insert into ChiTietPhieuThue values(02,6,4000,1,4000,N'')
+insert into ChiTietPhieuThue values(02,7,30000,1,30000,N'')
+insert into ChiTietPhieuThue values(03,8,12000,1,12000,N'')
+insert into ChiTietPhieuThue values(03,9,6000,1,6000,N'')
+insert into ChiTietPhieuThue values(04,10,4000,1,4000,N'')
+insert into ChiTietPhieuThue values(04,11,12200,1,12200,N'')
+insert into ChiTietPhieuThue values(04,12,9600,1,9600,N'')
+insert into ChiTietPhieuThue values(05,13,12200,1,12200,N'')
+insert into ChiTietPhieuThue values(05,14,13600,1,13600,N'')
+insert into ChiTietPhieuThue values(05,15,14200,1,14200,N'')
+--
+insert into ChiTietPhieuThue values(06,21,6000,2,12000,N'')
+insert into ChiTietPhieuThue values(06,22,12000,1,12000,N'')
+insert into ChiTietPhieuThue values(07,23,1300,1,13000,N'')
+insert into ChiTietPhieuThue values(07,24,2400,1,2400,N'')
+insert into ChiTietPhieuThue values(08,25,30000,1,30000,N'')
+insert into ChiTietPhieuThue values(08,26,4000,1,4000,N'')
+insert into ChiTietPhieuThue values(08,27,7000,1,7000,N'')
+insert into ChiTietPhieuThue values(09,28,12000,1,12000,N'')
+insert into ChiTietPhieuThue values(09,29,6000,1,6000,N'')
+insert into ChiTietPhieuThue values(10,30,8000,1,8000,N'')
+insert into ChiTietPhieuThue values(10,31,6000,1,6000,N'')
+insert into ChiTietPhieuThue values(11,32,6000,1,6000,N'')
+insert into ChiTietPhieuThue values(11,33,12200,1,12200,N'')
+insert into ChiTietPhieuThue values(11,34,24000,1,24000,N'')
+insert into ChiTietPhieuThue values(11,35,11000,1,11000,N'')
+
+insert into ChiTietPhieuThue values(12,41,4000,2,4000,N'')
+insert into ChiTietPhieuThue values(12,42,4000,1,4000,N'')
+insert into ChiTietPhieuThue values(12,43,4000,1,4000,N'')
+insert into ChiTietPhieuThue values(13,44,4400,1,4400,N'')
+insert into ChiTietPhieuThue values(13,45,10000,1,10000,N'')
+insert into ChiTietPhieuThue values(13,46,4000,1,4000,N'')
+insert into ChiTietPhieuThue values(13,47,7000,1,70000,N'')
+insert into ChiTietPhieuThue values(13,48,12000,1,12000,N'')
+insert into ChiTietPhieuThue values(14,49,6000,1,6000,N'')
+insert into ChiTietPhieuThue values(14,50,5000,1,5000,N'')
+insert into ChiTietPhieuThue values(14,11,12200,1,12200,N'')
+insert into ChiTietPhieuThue values(14,12,9600,1,9600,N'')
+insert into ChiTietPhieuThue values(15,13,12200,1,12200,N'')
+insert into ChiTietPhieuThue values(15,14,13600,1,13600,N'')
+insert into ChiTietPhieuThue values(15,15,14200,1,14200,N'')
+---------
+insert into ChiTietPhieuThue values(16,1,6000,2,12000,N'')
+insert into ChiTietPhieuThue values(16,2,4000,1,4000,N'')
+insert into ChiTietPhieuThue values(17,3,4000,1,4000,N'')
+insert into ChiTietPhieuThue values(17,4,4400,1,4400,N'')
+insert into ChiTietPhieuThue values(18,5,10000,1,10000,N'')
+insert into ChiTietPhieuThue values(18,6,4000,1,4000,N'')
+insert into ChiTietPhieuThue values(18,7,30000,1,30000,N'')
+insert into ChiTietPhieuThue values(19,8,12000,1,12000,N'')
+insert into ChiTietPhieuThue values(19,9,6000,1,6000,N'')
+insert into ChiTietPhieuThue values(20,10,4000,1,4000,N'')
+insert into ChiTietPhieuThue values(20,11,12200,1,12200,N'')
+insert into ChiTietPhieuThue values(21,12,9600,1,9600,N'')
+insert into ChiTietPhieuThue values(21,13,12200,1,12200,N'')
+insert into ChiTietPhieuThue values(22,14,13600,1,13600,N'')
+insert into ChiTietPhieuThue values(22,15,14200,1,14200,N'')
+
+insert into ChiTietPhieuThue values(23,1,6000,2,12000,N'')
+insert into ChiTietPhieuThue values(23,2,4000,1,4000,N'')
+insert into ChiTietPhieuThue values(24,3,4000,1,4000,N'')
+insert into ChiTietPhieuThue values(25,4,4400,1,4400,N'')
+insert into ChiTietPhieuThue values(26,5,10000,1,10000,N'')
+insert into ChiTietPhieuThue values(26,6,4000,1,4000,N'')
+insert into ChiTietPhieuThue values(26,7,30000,1,30000,N'')
+insert into ChiTietPhieuThue values(27,8,12000,1,12000,N'')
+insert into ChiTietPhieuThue values(27,9,6000,1,6000,N'')
+insert into ChiTietPhieuThue values(28,10,4000,1,4000,N'')
+insert into ChiTietPhieuThue values(28,11,12200,1,12200,N'')
+insert into ChiTietPhieuThue values(29,12,9600,1,9600,N'')
+insert into ChiTietPhieuThue values(29,13,12200,1,12200,N'')
+insert into ChiTietPhieuThue values(30,14,13600,1,13600,N'')
+insert into ChiTietPhieuThue values(30,15,14200,1,14200,N'')
+
+
 
 -----------------------------14-------------------------------------
 select * from TacGia
-insert into TacGia values(N'Nguyễn Thị Minh Tâm',N'TCP',1,'1998/05/26',N'Đăk Lăk',N'')
-insert into TacGia values(N'Nguyễn Thị Thuy',N'Yuuki',1,'1998/08/25',N'Kon Tum',N'')
-insert into TacGia values(N'Đỗ Huy Nhân',N'Tiểu kết',1,'1998/02/15',N'Nha Trang',N'')
-insert into TacGia values(N'Đỗ Thị Chinh',N'Bạch Dương',1,'1998/04/14',N'Thái Nguyên',N'')
-insert into TacGia values(N'Đào Văn Nam',N'Namdv',1,'1998/08/26',N'Thái Bình',N'')
+insert into TacGia values(N'Nguyễn Thị Minh Tâm',N'',1,'1998/05/26',N'Đăk Lăk',N'')
+insert into TacGia values(N'Nguyễn Thị Thùy Linh',N'',1,'1982/05/16',N'Nghệ An',N'')
+insert into TacGia values(N'Nguyễn Hoàng Anh',N'',0,'1984/01/26',N'Lâm Đồng',N'')
+insert into TacGia values(N'Đinh Mạnh Ninh',N'',0,'1988/05/26',N'Đà Nẵng',N'')
+insert into TacGia values(N'Hoàng Long Vũ',N'',0,'1979/03/26',N'Hà Nội',N'')
+insert into TacGia values(N'Linh Trần',N'',1,'1982/05/26',N'Hồ Chí Minh',N'')
+
+insert into TacGia values(N'Conan Doyle',N'',0,'1974/08/25',N'LonDon, Anh',N'Đối với các độc giả yêu thích dòng văn trinh thám nói riêng cũng như những người yêu sách trên toàn thế giới nói chung thì không phải nói nhiều về sức hút của hai cái tên: nhà văn Conan Doyle và “đứa con tinh thần” của cả cuộc đời ông - Sherlock Holmes')
+insert into TacGia values(N'',N'Cửu Lộ Phi Hương',1,'1985/02/15',N'Tấn Giang, Trung Quốc',N'Cửu Lộ Phi Hương là tác giả của trang tiểu thuyết Tấn Giang, một em gái mũm mĩm thích ăn thịt, thường viết truyện vừa, trong tác phẩm không tỏ vẻ uyên thâm hay màu mè, cách hành văn ngắn gọn, dễ hiểu và hài hước.')
+insert into TacGia values(N'Đồng Hoa',N' Trương Tiểu Tam  ',1,'1982/10/18',N'Bắc Kinh',N'Tốt nghiệp tại đại học Bắc Kinh.Là một trong “Tứ đại thiên hậu” của dòng tân tiểu thuyết ngôn tình, được phong là Nhiên tình thiên hậu. Từng tốt nghiệp học viện quản lý Quang Hoa thuộc đại học Bắc Kinh, sau khi tốt nghiệp làm công việc phân tích tài chính tại ngân hàng Trung Quốc ở Thẩm Quyến. Hiện đang cùng chồng định cư tại New York, Mĩ.')
+
+insert into TacGia values(null,N'Đường Thất Công Tử',1,'1986/08/26',N'Thái Bình',N'Đường Thất Công Tử là một nhà văn nữ thuộc thế hệ 8X, khi còn học trung học đã đọc sách của Oscar Wilde, trong đó có một câu mà cô luôn ghi nhớ: "Một người muốn trở lại tuổi thanh xuân chỉ cần làm lại những việc ngốc nghếch đã từng làm là đủ rồi". Thế nên hàng ngày cô đều làm những việc ngốc nghếch, vừa tươi trẻ,lại vừa cảm thấy mình cứ tiếp tục tươi trẻ mãi như thế này thật không hay.')
 
 -------------------------15---------------------------------------
 select * from KhuyenMai
 select * from Sach
-insert into KhuyenMai values('2017/02/14','2017/02/20',150000,5,1,30000,5)
-insert into KhuyenMai values('2017/03/26','2017/04/05',200000,10,2,20000,5)
-insert into KhuyenMai values('2017/05/01','2017/05/10',150000,10,3,15000,5)
-insert into KhuyenMai values('2017/06/01','2017/06/10',220000,2,1,220000,5)
-insert into KhuyenMai values('2017/07/20','2017/07/30',300000,5,2,150000,5)
-insert into KhuyenMai values('2017/08/25','2017/09/10',120000,7,6,20000,5)
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,SoTienHoaDon,KhuyenMai) values('2017/02/14','2017/02/20',150000,N'Giảm giá 15% cho đơn hàng trên 150k')
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,KhuyenMai) values('2017/03/26','2017/04/01',200000,N'Giảm giá 20% cho đơn hàng trên 200k')
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,SoLuong,KhuyenMai) values('2017/05/01','2017/05/03',10,N'Giảm giá 15% cho khách hàng mua trên 10 cuốn sách')
+
+insert into KhuyenMai values('2017/06/01','2017/06/05','',10,'','',N'Giảm giá 15% cho khách hàng mua trên 10 cuốn sách')
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,KhuyenMai) values('2017/06/01','2017/06/05',1,N'Giảm giá 10% ')
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,KhuyenMai) values('2017/06/01','2017/06/05',1,N'Giảm giá 12%')
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,KhuyenMai) values('2017/06/01','2017/06/05',3,N'Giảm giá 10%')
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,KhuyenMai) values('2017/06/01','2017/06/05',5,N'Giảm giá 15%')
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,KhuyenMai) values('2017/06/01','2017/06/05',7,N'Giảm giá 25%')
+
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,KhuyenMai) values('2017/07/01','2017/07/05',1,N'Đồng giá 25k')
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,KhuyenMai) values('2017/07/01','2017/07/05',2,N'Đồng giá 25k')
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,KhuyenMai) values('2017/07/01','2017/07/05',4,N'Đồng giá 25k')
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,KhuyenMai) values('2017/07/01','2017/07/05',6,N'Đồng giá 25k')
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,KhuyenMai) values('2017/07/01','2017/07/05',7,N'Đồng giá 25k')
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,KhuyenMai) values('2017/07/01','2017/07/05',9,N'Đồng giá 25k')
+
+
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,SoTienHoaDon,KhuyenMai) values('2017/08/14','2017/08/20',150000,N'Giảm giá 15% cho đơn hàng trên 150k')
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,KhuyenMai) values('2017/10/26','2017/10/01',200000,N'Giảm giá 20% cho đơn hàng trên 200k')
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,SoLuong,KhuyenMai) values('2017/11/01','2017/11/03',10,N'Giảm giá 15% cho khách hàng mua trên 10 cuốn sách')
 
 ------------------------------------16------------------------------------
 
@@ -433,16 +617,16 @@ insert into ChiTietTacGia values(7,2,N'')
 select * from PhieuPhat
 select * from ChiTietPhieuPhat
 select * from Sach
-insert into ChiTietPhieuPhat values(1,1,N'Làm rách',15000,1,15000,N'')
-insert into ChiTietPhieuPhat values(2,2,N'Làm mất',20000,2,40000,N'')
-insert into ChiTietPhieuPhat values(3,3,N'Làm rách',9000,1,18000,N'')
-insert into ChiTietPhieuPhat values(4,4,N'Làm bẩn',120000,2,240000,N'')
-insert into ChiTietPhieuPhat values(5,5,N'Làm rách',100000,1,100000,N'')
-insert into ChiTietPhieuPhat values(6,6,N'Làm mất',10000,3,30000,N'')
-insert into ChiTietPhieuPhat values(7,7,N'Làm rách',15000,2,30000,N'')
-insert into ChiTietPhieuPhat values(8,8,N'Làm bẩn',20000,1,20000,N'')
-insert into ChiTietPhieuPhat values(9,9,N'Làm rách',20000,3,60000,N'')
-insert into ChiTietPhieuPhat values(10,10,N'Làm mất',20000,2,40000,N'')
+insert into ChiTietPhieuPhat values(1,1,0.6,15000,1,15000,N'')
+insert into ChiTietPhieuPhat values(2,2,1,20000,2,40000,N'')
+insert into ChiTietPhieuPhat values(3,3,1,9000,1,18000,N'')
+insert into ChiTietPhieuPhat values(4,4,1,120000,2,240000,N'')
+insert into ChiTietPhieuPhat values(5,5,2,100000,1,100000,N'')
+insert into ChiTietPhieuPhat values(6,6,2,10000,3,30000,N'')
+insert into ChiTietPhieuPhat values(7,7,2,15000,2,30000,N'')
+insert into ChiTietPhieuPhat values(8,8,2,20000,1,20000,N'')
+insert into ChiTietPhieuPhat values(9,9,2,20000,3,60000,N'')
+insert into ChiTietPhieuPhat values(10,10,3,20000,2,40000,N'')
 ---------------------------------18------------------------
 select * from TheLoai
 insert into TheLoai values(N'Truyện tranh',N'')
@@ -458,4 +642,4 @@ insert into ChiTietTheLoai values (3,3,N'')
 insert into ChiTietTheLoai values (4,4,N'')
 insert into ChiTietTheLoai values (5,5,N'')
 
-
+select * from LoaiDocGia
