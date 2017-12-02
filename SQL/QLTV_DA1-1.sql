@@ -11,6 +11,7 @@ create table Quyen(
 MaQuyen int primary key not null Identity(1,1),
 TenQuyen nvarchar(20) not null,
 GhiChu nvarchar(250) null,
+Ma varchar(9) not null,
 )
 --2
 create table NhanVien(
@@ -186,8 +187,10 @@ NgayBatDau Date not null,
 NgayKetThuc Date not null,
 SoTienHoaDon money null,
 SoLuong int null,
+Voucher varchar(max) null,
 MaSach int null,
-GiaSach money null,
+GiaSach varchar(max) null,
+DongofGiam bit null,
 KhuyenMai nvarchar(MAX) null
 )
 --Table Nhân Viên
@@ -253,8 +256,8 @@ insert into DocGia values(N'Nguyễn Trần Thanh Bình', 4,0,'1998/09/18','0128
 
 --------------------------------3-------------------------------------------------------------
 select* from Quyen
-insert into Quyen values(N'Nhân viên', N'')
-insert into Quyen values(N'Quản Lý', N'')
+insert into Quyen values(N'Nhân viên', N'','000000000')
+insert into Quyen values(N'Quản Lý', N'','000000001')
 
 -----------------------------------------4---------------------------------------------------
 select * from NhanVien
@@ -453,7 +456,6 @@ insert into PhieuNhap values(10,4,2,'2017/09/19',4000000,N'')
 
 ----------------------------------------12-------------------------------------
 select * from ChiTietPhieuNhap
-select * from PhieuNhap
 select * from Sach
 insert into ChiTietPhieuNhap values(1,1,25000,50,1200000,N'')
 insert into ChiTietPhieuNhap values(2,2,15000,60,900000,N'')
@@ -576,29 +578,35 @@ insert into TacGia values(null,N'Đường Thất Công Tử',1,'1986/08/26',N'T
 -------------------------15---------------------------------------
 select * from KhuyenMai
 select * from Sach
-insert into KhuyenMai(NgayBatDau,NgayKetThuc,SoTienHoaDon,KhuyenMai) values('2017/02/14','2017/02/20',150000,N'Giảm giá 15% cho đơn hàng trên 150k')
-insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,KhuyenMai) values('2017/03/26','2017/04/01',200000,N'Giảm giá 20% cho đơn hàng trên 200k')
-insert into KhuyenMai(NgayBatDau,NgayKetThuc,SoLuong,KhuyenMai) values('2017/05/01','2017/05/03',10,N'Giảm giá 15% cho khách hàng mua trên 10 cuốn sách')
-
-insert into KhuyenMai values('2017/06/01','2017/06/05','',10,'','',N'Giảm giá 15% cho khách hàng mua trên 10 cuốn sách')
-insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,KhuyenMai) values('2017/06/01','2017/06/05',1,N'Giảm giá 10% ')
-insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,KhuyenMai) values('2017/06/01','2017/06/05',1,N'Giảm giá 12%')
-insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,KhuyenMai) values('2017/06/01','2017/06/05',3,N'Giảm giá 10%')
-insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,KhuyenMai) values('2017/06/01','2017/06/05',5,N'Giảm giá 15%')
-insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,KhuyenMai) values('2017/06/01','2017/06/05',7,N'Giảm giá 25%')
-
-insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,KhuyenMai) values('2017/07/01','2017/07/05',1,N'Đồng giá 25k')
-insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,KhuyenMai) values('2017/07/01','2017/07/05',2,N'Đồng giá 25k')
-insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,KhuyenMai) values('2017/07/01','2017/07/05',4,N'Đồng giá 25k')
-insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,KhuyenMai) values('2017/07/01','2017/07/05',6,N'Đồng giá 25k')
-insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,KhuyenMai) values('2017/07/01','2017/07/05',7,N'Đồng giá 25k')
-insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,KhuyenMai) values('2017/07/01','2017/07/05',9,N'Đồng giá 25k')
+--insert into KhuyenMai(NgayBatDau,NgayKetThuc,SoTienHoaDon,KhuyenMai) values('2017/02/14','2017/02/20',150000,N'Giảm giá 15% cho đơn hàng trên 150k')
+--insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,KhuyenMai) values('2017/03/26','2017/04/01',200000,N'Giảm giá 20% cho đơn hàng trên 200k')
+--insert into KhuyenMai(NgayBatDau,NgayKetThuc,SoLuong,KhuyenMai) values('2017/05/01','2017/05/03',10,N'Giảm giá 15% cho khách hàng mua trên 10 cuốn sách')
 
 
-insert into KhuyenMai(NgayBatDau,NgayKetThuc,SoTienHoaDon,KhuyenMai) values('2017/08/14','2017/08/20',150000,N'Giảm giá 15% cho đơn hàng trên 150k')
-insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,KhuyenMai) values('2017/10/26','2017/10/01',200000,N'Giảm giá 20% cho đơn hàng trên 200k')
-insert into KhuyenMai(NgayBatDau,NgayKetThuc,SoLuong,KhuyenMai) values('2017/11/01','2017/11/03',10,N'Giảm giá 15% cho khách hàng mua trên 10 cuốn sách')
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,GiaSach,DongofGiam,KhuyenMai) values('2017/06/01','2017/12/05',1,0.1,0,N'Giảm giá 10% ')
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,GiaSach,DongofGiam,KhuyenMai) values('2017/06/01','2017/12/05',1,0.12,0,N'Giảm giá 12%')
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,GiaSach,DongofGiam,KhuyenMai) values('2017/06/01','2017/12/05',3,0.1,0,N'Giảm giá 10%')
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,GiaSach,DongofGiam,KhuyenMai) values('2017/06/01','2017/06/05',5,0.15,0,N'Giảm giá 15%')
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,GiaSach,DongofGiam,KhuyenMai) values('2017/06/01','2017/06/05',7,0.25,0,N'Giảm giá 25%')
 
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,GiaSach,DongofGiam,KhuyenMai) values('2017/07/01','2017/12/05',1,25000,1,N'Đồng giá 25k')
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,GiaSach,DongofGiam,KhuyenMai) values('2017/07/01','2017/12/05',2,25000,1,N'Đồng giá 25k')
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,GiaSach,DongofGiam,KhuyenMai) values('2017/07/01','2017/12/05',4,25000,1,N'Đồng giá 25k')
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,GiaSach,DongofGiam,KhuyenMai) values('2017/07/01','2017/07/05',6,25000,1,N'Đồng giá 25k')
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,GiaSach,DongofGiam,KhuyenMai) values('2017/07/01','2017/12/05',7,25000,1,N'Đồng giá 25k')
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,MaSach,GiaSach,DongofGiam,KhuyenMai) values('2017/07/01','2017/07/05',9,25000,1,N'Đồng giá 25k')
+
+
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,SoTienHoaDon,GiaSach,KhuyenMai) values('2017/08/14','2017/08/20',150000,0.15,N'Giảm giá 15% cho đơn hàng trên 150k')
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,SoTienHoaDon,GiaSach,KhuyenMai) values('2017/10/26','2017/10/01',200000,0.2,N'Giảm giá 20% cho đơn hàng trên 200k')
+
+
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,SoLuong,GiaSach,KhuyenMai) values('2017/11/01','2017/11/03',10,0.05,N'Giảm giá 5% cho khách hàng mua trên 10 cuốn sách')
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,SoLuong,GiaSach,KhuyenMai) values('2017/11/01','2017/12/03',20,0.1,N'Giảm giá 10% cho khách hàng mua trên 20 cuốn sách')
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,SoLuong,GiaSach,KhuyenMai) values('2017/11/01','2017/12/03',30,0.15,N'Giảm giá 15% cho khách hàng mua trên 30 cuốn sách')
+
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,Voucher,GiaSach,KhuyenMai) values('2017/11/01','2017/12/03','MUNGKHAITRUONG',0.15,N'Giảm giá 15% cho Voucher')
+insert into KhuyenMai(NgayBatDau,NgayKetThuc,Voucher,GiaSach,KhuyenMai) values('2017/11/01','2017/12/03','11111111111111',0.15,N'Giảm giá 20% cho Voucher')
 ------------------------------------16------------------------------------
 
 select * from ChiTietTacGia
@@ -643,3 +651,8 @@ insert into ChiTietTheLoai values (4,4,N'')
 insert into ChiTietTheLoai values (5,5,N'')
 
 select * from LoaiDocGia
+Select * from ChiTietPhieuThue,PhieuThue 
+where ChiTietPhieuThue.MaPhieuThue = PhieuThue.MaPhieuThue 
+								  and SoPhieuThue = 'PT003'
+
+								  Select NgayTra,TongTien from PhieuThue where MaPhieuThue =3
